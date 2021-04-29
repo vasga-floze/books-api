@@ -20,7 +20,9 @@ class Book extends JsonResource
         return[
             'id'=>$this->id,
             'title'=>$this->title,
+            'genre'=>$this->genre,
             'author'=>$this->author,
+            'publisher'=>$this->publisher,
             'year'=>$this->year
         ];
     }
