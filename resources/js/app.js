@@ -1,4 +1,6 @@
 require('./bootstrap');
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 
 //se incluye vue
 import Vue from 'vue';

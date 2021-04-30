@@ -3,26 +3,29 @@
         <h2 class="text-center">Listado de libros</h2>
 
         <!--Pinta la tabla-->
-        <table class="table ">
-            <thead>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Género</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th>Año</th>
-            </thead>
-            <tbody>
-                <tr v-for="book in books" v-bind:key="book.id">
-                    <td> {{ book.id }} </td>
-                    <td> {{ book.title }} </td>
-                    <td> {{ book.genre }} </td>
-                    <td> {{ book.author }} </td>
-                    <td> {{ book.publisher }} </td>
-                    <td> {{ book.year }} </td>
-                </tr>
-            </tbody>
-        </table>
+
+        <b-table-simple b-table striped hover>
+        <b-thead>
+          <b-th>ID</b-th>
+          <b-th>Título</b-th>
+          <b-th>Género</b-th>
+          <b-th>Autor</b-th>
+          <b-th>Editorial</b-th>
+          <b-th>Año</b-th>
+          <b-th></b-th>
+          <b-th></b-th>
+        </b-thead>
+        <b-tbody>
+          <b-tr v-for="book in books" v-bind:key="book.id">
+              <b-td>{{ book.id }}</b-td>
+              <b-td>{{ book.title }}</b-td>
+              <b-td>{{ book.genre }}</b-td>
+              <b-td>{{ book.author }}</b-td>
+              <b-td>{{ book.publisher }}</b-td>
+              <b-td>{{ book.year }}</b-td>
+          </b-tr>
+        </b-tbody>
+    </b-table-simple>
     </div>
 </template>
 
