@@ -23,7 +23,8 @@ class Book extends JsonResource
             'genre'=>$this->genre,
             'author'=>$this->author,
             'publisher'=>$this->publisher,
-            'year'=>$this->year
+            'year'=>$this->year,
+            'cover'=>$this->cover
         ];
     }
     public function with($request){

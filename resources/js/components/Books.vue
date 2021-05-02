@@ -1,5 +1,28 @@
 <template>
     <div>
+
+        <form @submit.prevent="addBook">
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.title" placeholder="Título"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.genre" placeholder="Género"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.author" placeholder="Autor"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.publisher" placeholder="Editorial"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.year" placeholder="Año"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" v-model="book.cover" placeholder="Portada"/>
+            </div>
+            <button type="button" @click="addUpdateBook()" class="btn btn-success">Guardar</button>
+        </form>
+        <br>
         <h2 class="text-center">Listado de libros</h2>
 
         <!--Pinta la tabla-->
@@ -11,6 +34,8 @@
                 <th>Autor</th>
                 <th>Editorial</th>
                 <th>Año</th>
+                <th>Portada</th>
+                <th>Actions</th>
             </thead>
             <tbody>
                 <tr v-for="book in books" v-bind:key="book.id">
@@ -20,6 +45,9 @@
                     <td> {{ book.author }} </td>
                     <td> {{ book.publisher }} </td>
                     <td> {{ book.year }} </td>
+                    <td> {{ book.cover }} </td>
+                    <td><button type="button" @click="deleteBook(book.id)">Eliminar</button></td>
+                    <td><button type="button" @click="updateBook(book)">Actualizar</button></td>
                 </tr>
             </tbody>
         </table>
@@ -30,27 +58,89 @@
     export default {
         data(){
             return{
-                books:[]
+                books:[],
+                book: [],
+                book:{
+                    id: '',
+                    title: '',
+                    genre: '',
+                    author: '',
+                    publisher: '',
+                    year: '',
+                    cover: ''
+                },
+                update: false,
+                book_id: ''
             }
         },
         created(){
-
-            this.getBooks(); //llama al método
-
+            this.getBooks();
         },
-        methods:{
-            //se define método para listar
+        methods: {
             getBooks(api_url){
-                //escribe la ruta con la que se va a listar
                 api_url = api_url || '/api/books';
-                //La API Fetch es una API estándar para realizar solicitudes HTTP en el navegador
                 fetch(api_url)
                     .then(response=>response.json())
                     .then(response=>{
                         this.books = response.data;
                     })
                     .catch(err=>console.log(err));
+            },
+            addUpdateBook(){                
+
+                if(this.update===false){
+                    fetch('/api/book',{
+                        method: 'post',
+                        body: JSON.stringify(this.book),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                        })
+                        .then(response=>response.json())
+                        .then(data=>{
+                            this.getBooks();
+                        })
+                        .catch(err=>console.log(err));
+
+                }else{
+                    fetch('/api/book/',{
+                        method: 'put',
+                        body: JSON.stringify(this.book),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                    .then(response=>response.json())
+                        .then(data=>{
+                            this.getBooks();
+                        })
+                        .catch(err=>console.log(err));
+                }
+
+
+            },
+            deleteBook(id){
+                fetch('/api/book/' + id,{
+                  method: 'delete'
+                })
+                    .then(response=>response.json())
+                    .then(data=>{
+                        this.getBooks();
+                    })
+                    .catch(err=>console.log(err));
+
+            },
+            updateBook(book){
+                this.update =true;
+                this.book.id = book.id;
+                this.book.book_id = book.id;
+                this.book.title = book.title;
+                this.book.genre = book.genre;
+                this.book.author = book.author;
+                this.book.publisher = book.publisher;
+                this.book.year= book.year;
+                this.book.cover= book.cover;
             }
         }
-    }
+    };
 </script>

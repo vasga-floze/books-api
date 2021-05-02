@@ -1845,6 +1845,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1875,21 +1905,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      books: []
-    };
+    var _ref;
+
+    return _ref = {
+      books: [],
+      book: []
+    }, _defineProperty(_ref, "book", {
+      id: '',
+      title: '',
+      genre: '',
+      author: '',
+      publisher: '',
+      year: '',
+      cover: ''
+    }), _defineProperty(_ref, "update", false), _defineProperty(_ref, "book_id", ''), _ref;
   },
   created: function created() {
-    this.getBooks(); //llama al método
+    this.getBooks();
   },
   methods: {
-    //se define método para listar
     getBooks: function getBooks(api_url) {
       var _this = this;
 
-      //escribe la ruta con la que se va a listar
-      api_url = api_url || '/api/books'; //La API Fetch es una API estándar para realizar solicitudes HTTP en el navegador
-
+      api_url = api_url || '/api/books';
       fetch(api_url).then(function (response) {
         return response.json();
       }).then(function (response) {
@@ -1897,6 +1935,63 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    addUpdateBook: function addUpdateBook() {
+      var _this2 = this;
+
+      if (this.update === false) {
+        fetch('/api/book', {
+          method: 'post',
+          body: JSON.stringify(this.book),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          _this2.getBooks();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else {
+        fetch('/api/book/', {
+          method: 'put',
+          body: JSON.stringify(this.book),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          _this2.getBooks();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
+    },
+    deleteBook: function deleteBook(id) {
+      var _this3 = this;
+
+      fetch('/api/book/' + id, {
+        method: 'delete'
+      }).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this3.getBooks();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    updateBook: function updateBook(book) {
+      this.update = true;
+      this.book.id = book.id;
+      this.book.book_id = book.id;
+      this.book.title = book.title;
+      this.book.genre = book.genre;
+      this.book.author = book.author;
+      this.book.publisher = book.publisher;
+      this.book.year = book.year;
+      this.book.cover = book.cover;
     }
   }
 });
@@ -19519,6 +19614,179 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.addBook($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.title,
+                expression: "book.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Título" },
+            domProps: { value: _vm.book.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "title", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.genre,
+                expression: "book.genre"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Género" },
+            domProps: { value: _vm.book.genre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "genre", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.author,
+                expression: "book.author"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Autor" },
+            domProps: { value: _vm.book.author },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "author", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.publisher,
+                expression: "book.publisher"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Editorial" },
+            domProps: { value: _vm.book.publisher },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "publisher", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.year,
+                expression: "book.year"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Año" },
+            domProps: { value: _vm.book.year },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "year", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.book.cover,
+                expression: "book.cover"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Portada" },
+            domProps: { value: _vm.book.cover },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.book, "cover", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.addUpdateBook()
+              }
+            }
+          },
+          [_vm._v("Guardar")]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
     _c("h2", { staticClass: "text-center" }, [_vm._v("Listado de libros")]),
     _vm._v(" "),
     _c("table", { staticClass: "table " }, [
@@ -19538,7 +19806,39 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(" " + _vm._s(book.publisher) + " ")]),
             _vm._v(" "),
-            _c("td", [_vm._v(" " + _vm._s(book.year) + " ")])
+            _c("td", [_vm._v(" " + _vm._s(book.year) + " ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(" " + _vm._s(book.cover) + " ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteBook(book.id)
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateBook(book)
+                    }
+                  }
+                },
+                [_vm._v("Actualizar")]
+              )
+            ])
           ])
         }),
         0
@@ -19562,7 +19862,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Editorial")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Año")])
+      _c("th", [_vm._v("Año")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Portada")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
     ])
   }
 ]
