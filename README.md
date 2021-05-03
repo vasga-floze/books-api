@@ -1,3 +1,11 @@
+## EJECUTAR ESTA APLICACION POR PRIMERA VEZ
+- Agregar la base de datos en el archivo de configuración .env.
+- Ejecutar las migraciones con el comando: ``php artisan migrate``
+- Instalar los paquetes de composer con el comando: ``composer install``
+- Instalar los paquetes de node con el comando: ``npm install``
+- Crear los datos falsos en la tabla existente con el comando: ``php artisan migrate:refresh --seed``
+- Para agrupar los scripts a través del módulo Laravel Mix con el comando: ``npm run dev``
+- Ahora solo resta levantar el servidor de artisan con el comando: ``php artisan serve``
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
