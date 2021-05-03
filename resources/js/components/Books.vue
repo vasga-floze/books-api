@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h1 class="text-center">API de libros</h1> 
+        <hr>
 
         <form @submit.prevent="addBook">
             <div class="form-group">
@@ -19,15 +21,18 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" v-model="book.cover" placeholder="Portada"/>
+            </div> 
+            <div class="text-center">
+                <button type="button" @click="addUpdateBook()" class="btn btn-primary">Guardar</button>
             </div>
-            <button type="button" @click="addUpdateBook()" class="btn btn-success">Guardar</button>
+            <hr>
         </form>
         <br>
         <h2 class="text-center">Listado de libros</h2>
 
         <!--Pinta la tabla-->
-        <table class="table ">
-            <thead>
+        <table class="table table-info">
+            <thead class="bg-primary">
                 <th>ID</th>
                 <th>Título</th>
                 <th>Género</th>
@@ -35,19 +40,19 @@
                 <th>Editorial</th>
                 <th>Año</th>
                 <th>Portada</th>
-                <th>Actions</th>
+                <th colspan="2" class="text-center">Actions</th>
             </thead>
             <tbody>
                 <tr v-for="book in books" v-bind:key="book.id">
-                    <td> {{ book.id }} </td>
+                    <td> <b>{{ book.id }}</b> </td>
                     <td> {{ book.title }} </td>
                     <td> {{ book.genre }} </td>
                     <td> {{ book.author }} </td>
                     <td> {{ book.publisher }} </td>
                     <td> {{ book.year }} </td>
                     <td> {{ book.cover }} </td>
-                    <td><button type="button" @click="deleteBook(book.id)">Eliminar</button></td>
-                    <td><button type="button" @click="updateBook(book)">Actualizar</button></td>
+                    <td><button type="button" class="btn btn-success" @click="updateBook(book)">Actualizar</button></td>
+                    <td><button type="button" class="btn btn-danger"  @click="deleteBook(book.id)">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
