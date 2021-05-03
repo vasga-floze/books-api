@@ -5,21 +5,27 @@
 
         <form @submit.prevent="addBook">
             <div class="form-group">
+                <label for="title">Titulo</label>
                 <input type="text" class="form-control" v-model="book.title" placeholder="Título"/>
             </div>
             <div class="form-group">
+                <label for="genre">Genero</label>
                 <input type="text" class="form-control" v-model="book.genre" placeholder="Género"/>
             </div>
             <div class="form-group">
+                <label for="author">Autor</label>
                 <input type="text" class="form-control" v-model="book.author" placeholder="Autor"/>
             </div>
             <div class="form-group">
+                <label for="publisher">Editorial</label>
                 <input type="text" class="form-control" v-model="book.publisher" placeholder="Editorial"/>
             </div>
             <div class="form-group">
+                <label for="year">Año</label>
                 <input type="text" class="form-control" v-model="book.year" placeholder="Año"/>
             </div>
             <div class="form-group">
+                <label for="portada">Portada</label>
                 <input type="text" class="form-control" v-model="book.cover" placeholder="Portada"/>
             </div> 
             <div class="text-center">
@@ -90,6 +96,7 @@
                         this.books = response.data;
                     })
                     .catch(err=>console.log(err));
+                    
             },
             addUpdateBook(){                
 
